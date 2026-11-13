@@ -1,0 +1,2095 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <title>Happy Birthday Dibya | December 12 — Love, Bhabesh</title>
+  <style>
+    /* ==========================================================================
+       1. CSS VARIABLES & RESET (ZERO EXTERNAL DEPENDENCIES)
+       ========================================================================== */
+    :root {
+      --bg-cream: #fffaf7;
+      --bg-blush: #ffeef2;
+      --bg-petal: #ffd6e0;
+      --pink-soft: #ffb3c6;
+      --pink-mid: #ff758f;
+      --pink-deep: #e63963;
+      --rose-gold: #c97b84;
+      --text-dark: #4a2c35;
+      --text-muted: #7d535f;
+      --white-glass: rgba(255, 255, 255, 0.84);
+      --border-soft: rgba(255, 117, 143, 0.28);
+      --shadow-soft: 0 20px 50px rgba(230, 57, 99, 0.12);
+      --shadow-card: 0 12px 32px rgba(74, 44, 53, 0.08);
+      --font-serif: "Georgia", "Palatino Linotype", "Book Antiqua", "Times New Roman", serif;
+      --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      --font-cursive: "Brush Script MT", "Segoe Script", "Snell Roundhand", "Apple Chancery", Georgia, cursive;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      color: var(--text-dark);
+      background: linear-gradient(135deg, var(--bg-cream) 0%, var(--bg-blush) 52%, #ffe3ec 100%);
+      min-height: 100vh;
+      overflow-x: hidden;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Hide scrollbar on body while locked */
+    body.is-locked {
+      overflow: hidden;
+      height: 100vh;
+    }
+
+    /* ==========================================================================
+       2. AMBIENT GPU-ACCELERATED BACKGROUND (BOKEH & FLOATING PETALS)
+       ========================================================================== */
+    .ambient-layer {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .bokeh {
+      position: absolute;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 182, 193, 0.45) 0%, rgba(255, 255, 255, 0) 70%);
+      will-change: transform, opacity;
+      animation: driftBokeh 18s ease-in-out infinite alternate;
+    }
+
+    .bokeh-1 { width: 34vmax; height: 34vmax; top: -8%; left: -6%; animation-duration: 20s; }
+    .bokeh-2 { width: 28vmax; height: 28vmax; bottom: -10%; right: -5%; animation-duration: 24s; animation-delay: -5s; }
+    .bokeh-3 { width: 22vmax; height: 22vmax; top: 42%; left: 65%; animation-duration: 19s; animation-delay: -9s; }
+
+    @keyframes driftBokeh {
+      0% { transform: translate3d(0, 0, 0) scale(1); opacity: 0.55; }
+      50% { transform: translate3d(25px, -20px, 0) scale(1.06); opacity: 0.75; }
+      100% { transform: translate3d(-18px, 22px, 0) scale(0.96); opacity: 0.5; }
+    }
+
+    .ambient-particle {
+      position: absolute;
+      bottom: -30px;
+      opacity: 0;
+      will-change: transform, opacity;
+      animation: floatUpSlow linear infinite;
+    }
+
+    @keyframes floatUpSlow {
+      0% {
+        transform: translate3d(0, 0, 0) rotate(0deg);
+        opacity: 0;
+      }
+      15% {
+        opacity: 0.55;
+      }
+      85% {
+        opacity: 0.45;
+      }
+      100% {
+        transform: translate3d(35px, -110vh, 0) rotate(240deg);
+        opacity: 0;
+      }
+    }
+
+    /* ==========================================================================
+       3. LOCK SCREEN (PASTEL DIGITAL DIARY SPLIT CARD)
+       ========================================================================== */
+    #lock-screen {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: clamp(12px, 3vw, 32px);
+      background: linear-gradient(145deg, #fff6f8 0%, #ffe6ee 50%, #ffdbe6 100%);
+      transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1), transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+      will-change: opacity, transform;
+    }
+
+    #lock-screen.unlocked {
+      opacity: 0;
+      transform: scale(1.05);
+      pointer-events: none;
+    }
+
+    .diary-card {
+      position: relative;
+      width: 100%;
+      max-width: 880px;
+      min-height: min(540px, 90vh);
+      background: #ffffff;
+      border-radius: 32px;
+      box-shadow: 0 25px 65px rgba(224, 79, 118, 0.18), 0 0 0 6px rgba(255, 255, 255, 0.75);
+      display: grid;
+      grid-template-columns: 1fr 1.05fr;
+      overflow: hidden;
+    }
+
+    /* Subtle binder rings in center on desktop */
+    .diary-binder {
+      position: absolute;
+      left: 48.8%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+      z-index: 5;
+      pointer-events: none;
+    }
+
+    .binder-ring {
+      width: 24px;
+      height: 10px;
+      border-radius: 99px;
+      background: linear-gradient(90deg, #f3c6d3, #ffffff, #e8a8bc);
+      box-shadow: 0 2px 6px rgba(160, 70, 95, 0.22);
+    }
+
+    /* Left Side: Cream/White Card with Oval Heart-Bordered Cat Frame */
+    .diary-left {
+      position: relative;
+      background: linear-gradient(180deg, #fffdf9 0%, #fff6f8 100%);
+      padding: clamp(20px, 4vw, 40px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+      border-right: 1px dashed rgba(255, 143, 163, 0.35);
+    }
+
+    .star-decor {
+      position: absolute;
+      color: #ff9ebb;
+      opacity: 0.7;
+      animation: twinkleStar 3.2s ease-in-out infinite alternate;
+      pointer-events: none;
+    }
+
+    @keyframes twinkleStar {
+      0% { transform: scale(0.85) rotate(-8deg); opacity: 0.45; }
+      100% { transform: scale(1.15) rotate(8deg); opacity: 0.9; }
+    }
+
+    .oval-frame-wrapper {
+      position: relative;
+      width: clamp(190px, 24vw, 245px);
+      height: clamp(235px, 30vw, 300px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+    }
+
+    .oval-photo-box {
+      width: 82%;
+      height: 82%;
+      border-radius: 50%;
+      background: radial-gradient(circle at 50% 35%, #fff5f8 0%, #ffe2eb 100%);
+      border: 4px solid #ffb3c6;
+      box-shadow: inset 0 4px 14px rgba(255, 117, 143, 0.18), 0 10px 24px rgba(255, 117, 143, 0.16);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .oval-heart-ring {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    .cat-float-heart {
+      animation: catHeartFloat 2.6s ease-in-out infinite;
+      transform-origin: center;
+    }
+
+    .cat-float-heart-2 {
+      animation: catHeartFloat 3.1s ease-in-out 0.9s infinite;
+      transform-origin: center;
+    }
+
+    @keyframes catHeartFloat {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-6px) scale(1.12); }
+    }
+
+    .diary-caption {
+      font-family: var(--font-serif);
+      font-size: clamp(1.05rem, 1.8vw, 1.3rem);
+      color: var(--text-dark);
+      font-weight: 600;
+      letter-spacing: 0.3px;
+    }
+
+    .diary-subcaption {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    /* Right Side: Soft Pastel Pink Keypad Panel */
+    .diary-right {
+      background: linear-gradient(160deg, #ffd8e4 0%, #ffc4d6 100%);
+      padding: clamp(22px, 4vw, 40px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .passcode-title {
+      font-family: var(--font-serif);
+      font-size: clamp(1.35rem, 2.4vw, 1.75rem);
+      color: #5c2a38;
+      font-weight: 700;
+      margin-bottom: 4px;
+      text-align: center;
+    }
+
+    .passcode-hint {
+      font-size: clamp(0.8rem, 1.3vw, 0.92rem);
+      color: #874759;
+      background: rgba(255, 255, 255, 0.55);
+      padding: 4px 14px;
+      border-radius: 99px;
+      margin-bottom: 18px;
+      font-weight: 500;
+    }
+
+    /* 4 Rounded Square PIN Boxes */
+    .pin-display {
+      display: flex;
+      gap: clamp(10px, 2vw, 16px);
+      margin-bottom: 22px;
+    }
+
+    .pin-display.shake {
+      animation: shakeError 0.45s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+    }
+
+    @keyframes shakeError {
+      10%, 90% { transform: translate3d(-3px, 0, 0); }
+      20%, 80% { transform: translate3d(5px, 0, 0); }
+      30%, 50%, 70% { transform: translate3d(-7px, 0, 0); }
+      40%, 60% { transform: translate3d(7px, 0, 0); }
+    }
+
+    .pin-box {
+      width: clamp(46px, 6.5vw, 56px);
+      height: clamp(46px, 6.5vw, 56px);
+      background: rgba(255, 255, 255, 0.92);
+      border: 2.5px solid #ff94b2;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 6px 14px rgba(190, 65, 100, 0.12);
+      transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+    }
+
+    .pin-box.filled {
+      border-color: var(--pink-deep);
+      background: #ffffff;
+      transform: scale(1.06);
+    }
+
+    .pin-box.error {
+      border-color: #d90429;
+      background: #fff0f3;
+    }
+
+    .pin-icon {
+      font-size: 1.45rem;
+      color: var(--pink-deep);
+      animation: popIn 0.22s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    @keyframes popIn {
+      0% { transform: scale(0); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    /* 3x4 Circular White Keypad */
+    .keypad-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: clamp(10px, 2vw, 15px);
+      max-width: 260px;
+      width: 100%;
+    }
+
+    .key-btn {
+      aspect-ratio: 1 / 1;
+      width: 100%;
+      max-width: 68px;
+      margin: 0 auto;
+      border: none;
+      border-radius: 50%;
+      background: #ffffff;
+      color: #6b3242;
+      font-family: "Comic Sans MS", "Chalkboard SE", var(--font-serif);
+      font-size: clamp(1.2rem, 2.2vw, 1.5rem);
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 6px 0 #f2a7be, 0 10px 18px rgba(173, 56, 89, 0.16);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.15s ease;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .key-btn:hover {
+      background: #fff8fa;
+      transform: translateY(-2px);
+    }
+
+    .key-btn:active, .key-btn.pressed {
+      transform: translateY(4px);
+      box-shadow: 0 2px 0 #f2a7be, 0 4px 8px rgba(173, 56, 89, 0.14);
+    }
+
+    .key-btn.key-symbol {
+      font-size: 1.15rem;
+      color: #b55d75;
+      background: #fff7fa;
+    }
+
+    .lock-status-msg {
+      margin-top: 14px;
+      font-size: 0.85rem;
+      color: #7d364a;
+      min-height: 20px;
+      font-weight: 600;
+      text-align: center;
+    }
+
+    /* ==========================================================================
+       4. FLOATING MUSIC CONTROL BUTTON
+       ========================================================================== */
+    .music-toggle {
+      position: fixed;
+      bottom: clamp(16px, 3vw, 28px);
+      right: clamp(16px, 3vw, 28px);
+      z-index: 900;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 11px 18px;
+      border-radius: 999px;
+      border: 1.5px solid rgba(255, 117, 143, 0.35);
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      color: var(--text-dark);
+      font-family: var(--font-sans);
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 10px 28px rgba(230, 57, 99, 0.18);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .music-toggle:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 14px 32px rgba(230, 57, 99, 0.25);
+    }
+
+    .sound-bars {
+      display: flex;
+      align-items: flex-end;
+      gap: 3px;
+      height: 15px;
+    }
+
+    .sound-bars span {
+      display: block;
+      width: 3px;
+      height: 5px;
+      border-radius: 2px;
+      background: var(--pink-deep);
+      transition: height 0.2s ease;
+    }
+
+    .music-toggle.playing .sound-bars span {
+      animation: equaliser 0.9s ease-in-out infinite alternate;
+    }
+
+    .music-toggle.playing .sound-bars span:nth-child(2) { animation-delay: 0.2s; }
+    .music-toggle.playing .sound-bars span:nth-child(3) { animation-delay: 0.4s; }
+    .music-toggle.playing .sound-bars span:nth-child(4) { animation-delay: 0.15s; }
+
+    @keyframes equaliser {
+      0% { height: 4px; }
+      100% { height: 15px; }
+    }
+
+    /* ==========================================================================
+       5. MAIN WEBSITE CONTENT LAYOUT & TYPOGRAPHY
+       ========================================================================== */
+    #main-site {
+      position: relative;
+      z-index: 1;
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 1.1s ease 0.2s, transform 1.1s ease 0.2s;
+    }
+
+    #main-site.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 clamp(18px, 4vw, 40px);
+    }
+
+    section {
+      padding: clamp(56px, 8vw, 100px) 0;
+    }
+
+    .section-badge {
+      display: inline-block;
+      padding: 6px 16px;
+      border-radius: 99px;
+      background: rgba(255, 117, 143, 0.14);
+      color: var(--pink-deep);
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-family: var(--font-serif);
+      font-size: clamp(1.9rem, 4vw, 3rem);
+      color: var(--text-dark);
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+
+    .section-subtitle {
+      font-size: clamp(1rem, 1.6vw, 1.15rem);
+      color: var(--text-muted);
+      max-width: 650px;
+      margin: 0 auto 42px;
+    }
+
+    .text-center { text-align: center; }
+
+    /* Reveal on Scroll Animation */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.85s cubic-bezier(0.22, 1, 0.36, 1), transform 0.85s cubic-bezier(0.22, 1, 0.36, 1);
+      will-change: opacity, transform;
+    }
+
+    .reveal.in-view {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ==========================================================================
+       6. HERO BANNER & LIVE 3-YEAR RELATIONSHIP COUNTER
+       ========================================================================== */
+    .hero {
+      min-height: 94vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding-top: clamp(40px, 6vw, 70px);
+    }
+
+    .hero-card {
+      background: var(--white-glass);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1.5px solid rgba(255, 255, 255, 0.9);
+      border-radius: 36px;
+      padding: clamp(34px, 6vw, 68px) clamp(20px, 5vw, 60px);
+      box-shadow: var(--shadow-soft);
+      max-width: 920px;
+      width: 100%;
+    }
+
+    .hero-date-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, #ff758f, #ff4d6d);
+      color: #ffffff;
+      padding: 8px 22px;
+      border-radius: 999px;
+      font-size: clamp(0.85rem, 1.4vw, 0.98rem);
+      font-weight: 600;
+      letter-spacing: 0.6px;
+      box-shadow: 0 8px 20px rgba(255, 77, 109, 0.28);
+      margin-bottom: 24px;
+    }
+
+    .hero-title {
+      font-family: var(--font-serif);
+      font-size: clamp(2.3rem, 5.8vw, 4.3rem);
+      font-weight: 700;
+      line-height: 1.14;
+      color: var(--text-dark);
+      margin-bottom: 14px;
+    }
+
+    .hero-name-highlight {
+      display: inline-block;
+      background: linear-gradient(120deg, #e63963, #ff758f, #d94e73);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-style: italic;
+    }
+
+    .hero-from {
+      font-family: var(--font-cursive);
+      font-size: clamp(1.6rem, 3.2vw, 2.3rem);
+      color: var(--rose-gold);
+      margin-bottom: 22px;
+    }
+
+    .hero-intro {
+      font-size: clamp(1rem, 1.6vw, 1.18rem);
+      color: var(--text-muted);
+      max-width: 680px;
+      margin: 0 auto 36px;
+    }
+
+    /* Live 3 Years Together Counter */
+    .counter-wrapper {
+      background: linear-gradient(145deg, #fff5f8, #ffffff);
+      border: 1.5px solid var(--border-soft);
+      border-radius: 26px;
+      padding: clamp(18px, 3vw, 28px);
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .counter-label {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--pink-deep);
+      font-weight: 700;
+      margin-bottom: 14px;
+    }
+
+    .counter-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: clamp(8px, 2vw, 16px);
+    }
+
+    .counter-item {
+      background: #ffffff;
+      border-radius: 18px;
+      padding: clamp(12px, 2vw, 18px) 8px;
+      box-shadow: 0 6px 18px rgba(230, 57, 99, 0.07);
+      border: 1px solid rgba(255, 179, 198, 0.35);
+    }
+
+    .counter-num {
+      display: block;
+      font-family: var(--font-serif);
+      font-size: clamp(1.5rem, 3.4vw, 2.35rem);
+      font-weight: 700;
+      color: var(--pink-deep);
+      line-height: 1.1;
+    }
+
+    .counter-unit {
+      font-size: clamp(0.72rem, 1.2vw, 0.85rem);
+      color: var(--text-muted);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-top: 4px;
+      display: block;
+    }
+
+    /* ==========================================================================
+       7. OUR STORY TIMELINE (3 YEARS & COUNTING)
+       ========================================================================== */
+    .story-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: clamp(20px, 3vw, 30px);
+    }
+
+    .story-card {
+      background: var(--white-glass);
+      backdrop-filter: blur(10px);
+      border: 1.5px solid rgba(255, 255, 255, 0.9);
+      border-radius: 28px;
+      padding: clamp(24px, 3.5vw, 36px);
+      box-shadow: var(--shadow-card);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .story-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .story-icon {
+      width: 54px;
+      height: 54px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, #ffe0e9, #ffc2d4);
+      color: var(--pink-deep);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      margin-bottom: 18px;
+    }
+
+    .story-year {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--pink-deep);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 6px;
+    }
+
+    .story-card h3 {
+      font-family: var(--font-serif);
+      font-size: 1.38rem;
+      margin-bottom: 12px;
+      color: var(--text-dark);
+    }
+
+    .story-card p {
+      color: var(--text-muted);
+      font-size: 0.98rem;
+    }
+
+    /* ==========================================================================
+       8. CHERISHED MEMORIES (INTERACTIVE POLAROID GALLERY)
+       ========================================================================== */
+    .polaroid-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: clamp(26px, 4vw, 44px);
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    .polaroid-card {
+      background: #ffffff;
+      padding: clamp(16px, 2.5vw, 24px) clamp(16px, 2.5vw, 24px) clamp(26px, 3.5vw, 34px);
+      border-radius: 22px;
+      box-shadow: 0 18px 42px rgba(74, 44, 53, 0.11);
+      border: 1px solid rgba(255, 179, 198, 0.3);
+      transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease;
+    }
+
+    .polaroid-card:nth-child(1) { transform: rotate(-1.2deg); }
+    .polaroid-card:nth-child(2) { transform: rotate(1.2deg); }
+
+    .polaroid-card:hover {
+      transform: rotate(0deg) translateY(-8px) scale(1.01);
+      box-shadow: 0 24px 54px rgba(230, 57, 99, 0.16);
+    }
+
+    .polaroid-photo-area {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      border-radius: 14px;
+      overflow: hidden;
+      background: linear-gradient(135deg, #fff0f4 0%, #ffe0ea 100%);
+      border: 2px dashed #ff9ebb;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .polaroid-photo-area img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .photo-placeholder-content {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .upload-photo-btn {
+      margin-top: 6px;
+      padding: 8px 16px;
+      border-radius: 99px;
+      border: 1.5px solid var(--pink-deep);
+      background: #ffffff;
+      color: var(--pink-deep);
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+
+    .upload-photo-btn:hover {
+      background: var(--pink-deep);
+      color: #ffffff;
+    }
+
+    .polaroid-tag {
+      display: inline-block;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--pink-deep);
+      background: #fff0f4;
+      padding: 4px 12px;
+      border-radius: 99px;
+      margin-bottom: 8px;
+    }
+
+    .polaroid-title {
+      font-family: var(--font-serif);
+      font-size: 1.42rem;
+      color: var(--text-dark);
+      margin-bottom: 10px;
+    }
+
+    .polaroid-story {
+      font-size: 0.96rem;
+      color: var(--text-muted);
+    }
+
+    /* ==========================================================================
+       9. WHY I LOVE YOU — HEARTFELT LETTER TO DIBYA
+       ========================================================================== */
+    .letter-paper {
+      position: relative;
+      max-width: 820px;
+      margin: 0 auto;
+      background: #fffdfc;
+      border-radius: 30px;
+      padding: clamp(32px, 6vw, 68px) clamp(24px, 6vw, 68px);
+      box-shadow: 0 24px 60px rgba(74, 44, 53, 0.1), 0 0 0 1px rgba(255, 179, 198, 0.45);
+      background-image: repeating-linear-gradient(
+        to bottom,
+        transparent 0px,
+        transparent 35px,
+        rgba(255, 179, 198, 0.22) 36px
+      );
+    }
+
+    .wax-seal {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, #ff6b8b, #c9184a);
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.65rem;
+      box-shadow: 0 8px 20px rgba(201, 24, 74, 0.35), inset 0 2px 5px rgba(255, 255, 255, 0.4);
+      margin: 0 auto 24px;
+    }
+
+    .letter-salutation {
+      font-family: var(--font-serif);
+      font-size: clamp(1.45rem, 2.8vw, 1.9rem);
+      color: var(--text-dark);
+      margin-bottom: 20px;
+      font-style: italic;
+    }
+
+    .letter-body p {
+      font-family: var(--font-serif);
+      font-size: clamp(1.04rem, 1.7vw, 1.18rem);
+      line-height: 1.9;
+      color: #4a2c35;
+      margin-bottom: 20px;
+    }
+
+    .letter-highlight {
+      background: linear-gradient(120deg, rgba(255, 179, 198, 0.35) 0%, rgba(255, 214, 224, 0.55) 100%);
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-weight: 600;
+    }
+
+    .letter-signoff {
+      margin-top: 32px;
+      text-align: right;
+    }
+
+    .letter-signoff span {
+      display: block;
+      font-family: var(--font-serif);
+      font-size: 1.05rem;
+      color: var(--text-muted);
+    }
+
+    .letter-signature {
+      font-family: var(--font-cursive);
+      font-size: clamp(1.9rem, 3.5vw, 2.5rem);
+      color: var(--pink-deep);
+      margin-top: 4px;
+    }
+
+    /* ==========================================================================
+       10. INTERACTIVE "OPEN WHEN..." ENVELOPES & BIRTHDAY WISH SURPRISE
+       ========================================================================== */
+    .envelopes-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: clamp(18px, 3vw, 28px);
+      max-width: 900px;
+      margin: 0 auto 64px;
+    }
+
+    .envelope-card {
+      position: relative;
+      background: linear-gradient(145deg, #ffffff, #fff2f6);
+      border: 2px solid #ffb3c6;
+      border-radius: 24px;
+      padding: clamp(22px, 3.5vw, 32px);
+      cursor: pointer;
+      text-align: center;
+      box-shadow: var(--shadow-card);
+      transition: transform 0.28s ease, box-shadow 0.28s ease, border-color 0.28s ease;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .envelope-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--pink-deep);
+      box-shadow: 0 16px 36px rgba(230, 57, 99, 0.16);
+    }
+
+    .envelope-icon {
+      font-size: 2.3rem;
+      margin-bottom: 12px;
+      display: inline-block;
+      transition: transform 0.3s ease;
+    }
+
+    .envelope-card:hover .envelope-icon {
+      transform: scale(1.15) rotate(-5deg);
+    }
+
+    .envelope-label {
+      font-family: var(--font-serif);
+      font-size: 1.18rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 6px;
+    }
+
+    .envelope-tap-hint {
+      font-size: 0.82rem;
+      color: var(--pink-deep);
+      font-weight: 600;
+    }
+
+    /* Birthday Cake & Wish Finale Box */
+    .wish-box {
+      background: linear-gradient(145deg, #ffe5ec 0%, #fff5f8 50%, #ffe0ea 100%);
+      border: 2px solid #ff9ebb;
+      border-radius: 34px;
+      padding: clamp(34px, 5vw, 56px) clamp(20px, 4vw, 44px);
+      text-align: center;
+      max-width: 780px;
+      margin: 0 auto;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .cake-illustration {
+      margin: 0 auto 20px;
+      width: 130px;
+      height: 130px;
+    }
+
+    .flame {
+      transform-origin: 65px 34px;
+      animation: flickerFlame 0.9s ease-in-out infinite alternate;
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+
+    .flame.blown-out {
+      opacity: 0;
+      transform: scale(0);
+    }
+
+    @keyframes flickerFlame {
+      0% { transform: scale(0.94) rotate(-3deg); }
+      100% { transform: scale(1.06) rotate(3deg); }
+    }
+
+    .wish-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 16px 34px;
+      border: none;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #ff4d6d 0%, #e63963 100%);
+      color: #ffffff;
+      font-family: var(--font-sans);
+      font-size: clamp(1rem, 1.6vw, 1.12rem);
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 12px 28px rgba(230, 57, 99, 0.35);
+      transition: transform 0.22s ease, box-shadow 0.22s ease;
+      margin-top: 12px;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .wish-btn:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 16px 34px rgba(230, 57, 99, 0.45);
+    }
+
+    .wish-btn:active {
+      transform: translateY(1px);
+    }
+
+    .wish-revealed-msg {
+      margin-top: 22px;
+      font-family: var(--font-serif);
+      font-size: clamp(1.1rem, 2vw, 1.35rem);
+      color: var(--pink-deep);
+      font-weight: 700;
+      min-height: 32px;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .wish-revealed-msg.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ==========================================================================
+       11. CUSTOM MODAL FOR "OPEN WHEN..." LETTERS
+       ========================================================================== */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 1200;
+      background: rgba(74, 44, 53, 0.45);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .modal-backdrop.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-card {
+      background: #fffdfb;
+      border: 2px solid #ffb3c6;
+      border-radius: 28px;
+      max-width: 520px;
+      width: 100%;
+      padding: clamp(26px, 4vw, 38px);
+      box-shadow: 0 25px 60px rgba(74, 44, 53, 0.25);
+      transform: scale(0.92) translateY(14px);
+      transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+      text-align: center;
+      position: relative;
+    }
+
+    .modal-backdrop.open .modal-card {
+      transform: scale(1) translateY(0);
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: none;
+      background: #ffe5ec;
+      color: var(--pink-deep);
+      font-size: 1.2rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-title {
+      font-family: var(--font-serif);
+      font-size: 1.45rem;
+      color: var(--pink-deep);
+      margin-bottom: 14px;
+    }
+
+    .modal-body {
+      font-family: var(--font-serif);
+      font-size: 1.08rem;
+      line-height: 1.8;
+      color: var(--text-dark);
+      margin-bottom: 20px;
+    }
+
+    /* ==========================================================================
+       12. CELEBRATION BURST PARTICLES (HEARTS & CONFETTI)
+       ========================================================================== */
+    .burst-particle {
+      position: fixed;
+      pointer-events: none;
+      z-index: 2000;
+      will-change: transform, opacity;
+      animation: burstFly var(--dur, 1.8s) cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes burstFly {
+      0% {
+        transform: translate3d(0, 0, 0) scale(0.4) rotate(0deg);
+        opacity: 1;
+      }
+      75% {
+        opacity: 1;
+      }
+      100% {
+        transform: translate3d(var(--tx), var(--ty), 0) scale(1.15) rotate(var(--rot));
+        opacity: 0;
+      }
+    }
+
+    footer {
+      text-align: center;
+      padding: 36px 20px 64px;
+      color: var(--text-muted);
+      font-size: 0.92rem;
+    }
+
+    /* ==========================================================================
+       13. RESPONSIVE BREAKPOINTS (MOBILE, TABLET, DESKTOP, SMART TV)
+       ========================================================================== */
+    @media (max-width: 820px) {
+      .diary-card {
+        grid-template-columns: 1fr;
+        max-width: 440px;
+        min-height: auto;
+      }
+
+      .diary-binder {
+        display: none;
+      }
+
+      .diary-left {
+        border-right: none;
+        border-bottom: 1px dashed rgba(255, 143, 163, 0.35);
+        padding: 20px 18px 16px;
+      }
+
+      .oval-frame-wrapper {
+        width: 145px;
+        height: 175px;
+        margin-bottom: 8px;
+      }
+
+      .diary-right {
+        padding: 20px 18px 24px;
+      }
+
+      .keypad-grid {
+        max-width: 225px;
+        gap: 10px;
+      }
+
+      .key-btn {
+        max-width: 58px;
+      }
+
+      .story-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .polaroid-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .polaroid-card:nth-child(1),
+      .polaroid-card:nth-child(2) {
+        transform: none;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .counter-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .envelopes-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (min-width: 1800px) {
+      html { font-size: 20px; }
+      .container { max-width: 1420px; }
+    }
+  </style>
+</head>
+<body class="is-locked">
+
+  <!-- ========================================================================
+       AMBIENT BACKGROUND (SOFT BOKEH + FLOATING PETALS)
+       ======================================================================== -->
+  <div class="ambient-layer" id="ambient-layer" aria-hidden="true">
+    <div class="bokeh bokeh-1"></div>
+    <div class="bokeh bokeh-2"></div>
+    <div class="bokeh bokeh-3"></div>
+  </div>
+
+  <!-- ========================================================================
+       1. LOCK SCREEN — PASTEL DIGITAL DIARY (PASSCODE: 0711)
+       ======================================================================== -->
+  <div id="lock-screen" role="dialog" aria-modal="true" aria-label="Dibya's Birthday Diary Lock Screen">
+    <div class="diary-card">
+      <!-- Decorative Diary Binder Rings -->
+      <div class="diary-binder" aria-hidden="true">
+        <span class="binder-ring"></span>
+        <span class="binder-ring"></span>
+        <span class="binder-ring"></span>
+        <span class="binder-ring"></span>
+        <span class="binder-ring"></span>
+      </div>
+
+      <!-- LEFT SIDE: Cream/White Card with Oval Heart-Bordered Cute Cat -->
+      <div class="diary-left">
+        <!-- Floating Pink Stars -->
+        <span class="star-decor" style="top: 12%; left: 14%; font-size: 1.2rem;">✦</span>
+        <span class="star-decor" style="top: 18%; right: 16%; font-size: 1.4rem; animation-delay: 0.7s;">★</span>
+        <span class="star-decor" style="bottom: 22%; left: 12%; font-size: 1.3rem; animation-delay: 1.3s;">✧</span>
+        <span class="star-decor" style="bottom: 16%; right: 14%; font-size: 1.1rem; animation-delay: 1.9s;">✦</span>
+        <span class="star-decor" style="top: 48%; left: 8%; font-size: 0.95rem; animation-delay: 0.4s;">♥</span>
+        <span class="star-decor" style="top: 44%; right: 9%; font-size: 0.95rem; animation-delay: 1.1s;">♥</span>
+
+        <div class="oval-frame-wrapper">
+          <!-- Tiny Red/Pink Hearts Bordering the Oval Frame -->
+          <svg class="oval-heart-ring" viewBox="0 0 240 290" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <g fill="#ff5c8a">
+              <text x="112" y="18" font-size="15">♥</text>
+              <text x="155" y="28" font-size="13" fill="#ff8fab">♥</text>
+              <text x="190" y="55" font-size="15">♥</text>
+              <text x="212" y="96" font-size="13" fill="#ff8fab">♥</text>
+              <text x="218" y="145" font-size="15">♥</text>
+              <text x="210" y="194" font-size="13" fill="#ff8fab">♥</text>
+              <text x="188" y="236" font-size="15">♥</text>
+              <text x="152" y="264" font-size="13" fill="#ff8fab">♥</text>
+              <text x="112" y="276" font-size="15">♥</text>
+              <text x="72" y="264" font-size="13" fill="#ff8fab">♥</text>
+              <text x="36" y="236" font-size="15">♥</text>
+              <text x="14" y="194" font-size="13" fill="#ff8fab">♥</text>
+              <text x="8" y="145" font-size="15">♥</text>
+              <text x="14" y="96" font-size="13" fill="#ff8fab">♥</text>
+              <text x="36" y="55" font-size="15">♥</text>
+              <text x="72" y="28" font-size="13" fill="#ff8fab">♥</text>
+            </g>
+          </svg>
+
+          <!-- Oval Photo Frame with Cute Blushing Cat SVG -->
+          <div class="oval-photo-box">
+            <svg viewBox="0 0 200 220" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Cute blushing kitten with floating hearts">
+              <!-- Floating Hearts Above Cat -->
+              <path class="cat-float-heart" d="M52 52 C52 46, 43 44, 43 51 C43 57, 52 63, 52 63 C52 63, 61 57, 61 51 C61 44, 52 46, 52 52 Z" fill="#ff5c8a"/>
+              <path class="cat-float-heart-2" d="M150 44 C150 38, 141 36, 141 43 C141 49, 150 55, 150 55 C150 55, 159 49, 159 43 C159 36, 150 38, 150 44 Z" fill="#ff85a1"/>
+              <path class="cat-float-heart" d="M100 30 C100 25, 93 24, 93 29 C93 34, 100 39, 100 39 C100 39, 107 34, 107 29 C107 24, 100 25, 100 30 Z" fill="#ff4d6d"/>
+
+              <!-- Cat Ears -->
+              <path d="M54 96 L46 52 L84 76 Z" fill="#ffffff" stroke="#e5b8c5" stroke-width="3" stroke-linejoin="round"/>
+              <path d="M57 90 L52 61 L77 77 Z" fill="#ffc2d4"/>
+              <path d="M146 96 L154 52 L116 76 Z" fill="#ffffff" stroke="#e5b8c5" stroke-width="3" stroke-linejoin="round"/>
+              <path d="M143 90 L148 61 L123 77 Z" fill="#ffc2d4"/>
+
+              <!-- Cat Body / Paws Peeking -->
+              <ellipse cx="100" cy="188" rx="48" ry="34" fill="#ffffff" stroke="#e5b8c5" stroke-width="3"/>
+              <!-- Little Heart Held by Cat -->
+              <path d="M100 165 C100 156, 86 154, 86 165 C86 175, 100 185, 100 185 C100 185, 114 175, 114 165 C114 154, 100 156, 100 165 Z" fill="#ff5c8a"/>
+              <!-- Cute Paws -->
+              <ellipse cx="78" cy="174" rx="12" ry="9" fill="#ffffff" stroke="#e5b8c5" stroke-width="2.5"/>
+              <ellipse cx="122" cy="174" rx="12" ry="9" fill="#ffffff" stroke="#e5b8c5" stroke-width="2.5"/>
+
+              <!-- Cat Head -->
+              <ellipse cx="100" cy="116" rx="56" ry="46" fill="#ffffff" stroke="#e5b8c5" stroke-width="3"/>
+
+              <!-- Cute Sparkly Eyes -->
+              <circle cx="78" cy="112" r="7.5" fill="#4a2c35"/>
+              <circle cx="75.5" cy="109.5" r="2.6" fill="#ffffff"/>
+              <circle cx="80" cy="114" r="1.2" fill="#ffffff"/>
+
+              <circle cx="122" cy="112" r="7.5" fill="#4a2c35"/>
+              <circle cx="119.5" cy="109.5" r="2.6" fill="#ffffff"/>
+              <circle cx="124" cy="114" r="1.2" fill="#ffffff"/>
+
+              <!-- Rosy Blushing Cheeks -->
+              <ellipse cx="64" cy="124" rx="10" ry="6" fill="#ff9ebb" opacity="0.72"/>
+              <ellipse cx="136" cy="124" rx="10" ry="6" fill="#ff9ebb" opacity="0.72"/>
+
+              <!-- Tiny Pink Nose & Happy Cat Mouth -->
+              <path d="M96 121 L104 121 L100 126 Z" fill="#ff758f"/>
+              <path d="M91 128 Q95.5 134 100 127 Q104.5 134 109 128" stroke="#6b3e4b" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+
+              <!-- Whiskers -->
+              <line x1="36" y1="115" x2="52" y2="118" stroke="#d4a3b1" stroke-width="2" stroke-linecap="round"/>
+              <line x1="36" y1="125" x2="52" y2="124" stroke="#d4a3b1" stroke-width="2" stroke-linecap="round"/>
+              <line x1="164" y1="115" x2="148" y2="118" stroke="#d4a3b1" stroke-width="2" stroke-linecap="round"/>
+              <line x1="164" y1="125" x2="148" y2="124" stroke="#d4a3b1" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </div>
+        </div>
+
+        <p class="diary-caption">Dibya's Secret Birthday Diary</p>
+        <p class="diary-subcaption">December 12 • Crafted with love by Bhabesh</p>
+      </div>
+
+      <!-- RIGHT SIDE: Pastel Pink Passcode Panel -->
+      <div class="diary-right">
+        <h2 class="passcode-title">Enter a passcode</h2>
+        <p class="passcode-hint">Hint: My birthday date</p>
+
+        <!-- 4 Rounded Square PIN Boxes -->
+        <div class="pin-display" id="pin-display" aria-label="Passcode entry progress">
+          <div class="pin-box" id="pin-0"></div>
+          <div class="pin-box" id="pin-1"></div>
+          <div class="pin-box" id="pin-2"></div>
+          <div class="pin-box" id="pin-3"></div>
+        </div>
+
+        <!-- 3x4 Circular White Keypad -->
+        <div class="keypad-grid" id="keypad">
+          <button type="button" class="key-btn" data-key="1">1</button>
+          <button type="button" class="key-btn" data-key="2">2</button>
+          <button type="button" class="key-btn" data-key="3">3</button>
+          <button type="button" class="key-btn" data-key="4">4</button>
+          <button type="button" class="key-btn" data-key="5">5</button>
+          <button type="button" class="key-btn" data-key="6">6</button>
+          <button type="button" class="key-btn" data-key="7">7</button>
+          <button type="button" class="key-btn" data-key="8">8</button>
+          <button type="button" class="key-btn" data-key="9">9</button>
+          <button type="button" class="key-btn key-symbol" data-key="*" aria-label="Clear passcode">*</button>
+          <button type="button" class="key-btn" data-key="0">0</button>
+          <button type="button" class="key-btn key-symbol" data-key="#" aria-label="Backspace">#</button>
+        </div>
+
+        <p class="lock-status-msg" id="lock-status-msg" aria-live="polite"></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       FLOATING ROMANTIC MUSIC TOGGLE (WEB AUDIO API SYNTHESIZER)
+       ======================================================================== -->
+  <button type="button" class="music-toggle" id="music-toggle" aria-label="Toggle background music">
+    <span class="sound-bars" aria-hidden="true">
+      <span></span><span></span><span></span><span></span>
+    </span>
+    <span id="music-label">Music: Off</span>
+  </button>
+
+  <!-- ========================================================================
+       MAIN BIRTHDAY WEBSITE CONTENT
+       ======================================================================== -->
+  <main id="main-site">
+
+    <!-- 1. HERO BANNER -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero-card reveal in-view">
+          <div class="hero-date-pill">
+            <span>🎂</span>
+            <span>December 12 • Celebrating You</span>
+            <span>✨</span>
+          </div>
+
+          <h1 class="hero-title">
+            Happy Birthday, <span class="hero-name-highlight">Dibya</span>
+          </h1>
+          <p class="hero-from">Forever yours, Bhabesh ♥</p>
+
+          <p class="hero-intro">
+            Today the whole world feels a little brighter because it is the day you were born.
+            From our school corridors three years ago to every quiet heartbeat we share today,
+            you are my favorite chapter, my safe place, and my greatest blessing.
+          </p>
+
+          <!-- Live 3 Years Together Counter -->
+          <div class="counter-wrapper">
+            <p class="counter-label">3 Years Together &amp; Every Second Counting</p>
+            <div class="counter-grid">
+              <div class="counter-item">
+                <span class="counter-num" id="cnt-years">3</span>
+                <span class="counter-unit">Years</span>
+              </div>
+              <div class="counter-item">
+                <span class="counter-num" id="cnt-days">1,095</span>
+                <span class="counter-unit">Days</span>
+              </div>
+              <div class="counter-item">
+                <span class="counter-num" id="cnt-hours">26,280</span>
+                <span class="counter-unit">Hours</span>
+              </div>
+              <div class="counter-item">
+                <span class="counter-num" id="cnt-seconds">00</span>
+                <span class="counter-unit">Live Secs</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. OUR STORY (3 YEARS & COUNTING) -->
+    <section id="our-story">
+      <div class="container">
+        <div class="text-center reveal">
+          <span class="section-badge">Our Journey</span>
+          <h2 class="section-title">Three Years &amp; Counting</h2>
+          <p class="section-subtitle">
+            Distance between buildings means nothing when two hearts beat in the exact same rhythm.
+          </p>
+        </div>
+
+        <div class="story-grid">
+          <article class="story-card reveal">
+            <div class="story-icon">🏫</div>
+            <p class="story-year">Chapter I • 3 Years Ago</p>
+            <h3>Where It All Began in School</h3>
+            <p>
+              Three years ago, back in school, what started as simple glances, shared smiles,
+              and innocent conversations quietly turned into the most meaningful love story of my life.
+              Every bell and every break felt special just knowing you were around.
+            </p>
+          </article>
+
+          <article class="story-card reveal">
+            <div class="story-icon">🏛️</div>
+            <p class="story-year">Chapter II • Different College Blocks</p>
+            <h3>Same College, Worlds Apart by Day</h3>
+            <p>
+              Now we study in the same college, yet in completely different blocks with almost
+              zero chance to see each other during the busy day. Even when hours pass without
+              crossing paths, knowing you are under the same sky makes every lecture worthwhile.
+            </p>
+          </article>
+
+          <article class="story-card reveal">
+            <div class="story-icon">💞</div>
+            <p class="story-year">Chapter III • Today &amp; Always</p>
+            <h3>Stronger With Every Passing Day</h3>
+            <p>
+              Not getting to meet easily during college hours never weakened us—it proved how
+              deep our bond truly is. Every rare five-minute glimpse, every message after class,
+              and every shared laugh feels like a treasure I never take for granted.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. CHERISHED MEMORIES (INTERACTIVE POLAROIDS) -->
+    <section id="memories">
+      <div class="container">
+        <div class="text-center reveal">
+          <span class="section-badge">Snapshots of Us</span>
+          <h2 class="section-title">Cherished Memories</h2>
+          <p class="section-subtitle">
+            Moments frozen in time that I replay whenever I miss you between classes.
+          </p>
+        </div>
+
+        <div class="polaroid-grid">
+          <!-- Memory 1: School Educational Tour to Pokhara -->
+          <article class="polaroid-card reveal">
+            <div class="polaroid-photo-area" id="pokhara-photo-box" style="border-style: solid; border-color: #ffc2d4;">
+              <img src="pokhara.png" alt="Bhabesh and Dibya at Pokhara Hotel" />
+            </div>
+
+            <span class="polaroid-tag">🏔️ School Educational Tour</span>
+            <h3 class="polaroid-title">Our Pokhara Trip &amp; Hotel Photo</h3>
+            <p class="polaroid-story">
+              Our school educational tour to Pokhara will forever live rent-free in my heart.
+              Taking our photo together at the hotel, surrounded by laughter, mountain air,
+              and your radiant smile—that single trip gave me memories I will cherish for a lifetime.
+            </p>
+          </article>
+
+          <!-- Memory 2: Our Movie Date -->
+          <article class="polaroid-card reveal">
+            <div class="polaroid-photo-area" style="border-style: solid; border-color: #ffc2d4;">
+              <img src="flim hall.png" alt="Bhabesh and Dibya on our movie date" />
+            </div>
+
+            <span class="polaroid-tag">🎬 Pure Magic</span>
+            <h3 class="polaroid-title">Our Movie Date</h3>
+            <p class="polaroid-story">
+              Sitting beside you in that quiet, dimly lit theater, holding each other's hands
+              with pure love—I honestly forgot the entire world existed outside those doors.
+              Every second felt suspended in time, just soaking in your warmth and presence.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. WHY I LOVE YOU — HEARTFELT LOVE LETTER TO DIBYA -->
+    <section id="love-letter">
+      <div class="container">
+        <div class="text-center reveal">
+          <span class="section-badge">From My Heart</span>
+          <h2 class="section-title">Why I Love You, Dibya</h2>
+        </div>
+
+        <div class="letter-paper reveal">
+          <div class="wax-seal" aria-hidden="true">♥</div>
+
+          <p class="letter-salutation">My dearest Dibya,</p>
+
+          <div class="letter-body">
+            <p>
+              Happy Birthday, my love. On your special day, I want you to see yourself through my eyes—not
+              just for how effortlessly beautiful and captivating you are, but for the rare,
+              incredible heart that beats inside you.
+            </p>
+            <p>
+              What makes me fall deeper in love with you every single day isn't only the easy,
+              sunny moments. It is how you love when things aren't easy. <span class="letter-highlight">Even when we argue,
+              or even when you get hurt, you never walk away—you still choose me in every condition.</span>
+              That kind of loyalty, patience, and grace is the rarest gift anyone could ever receive.
+            </p>
+            <p>
+              Whether we are separated across different blocks in college all day or counting down
+              the minutes until we talk again, you are always my calm in the chaos. So today, on
+              December 12, I make you this promise with everything I am:
+              <span class="letter-highlight">no matter the storm, no matter the distance, I will always choose you too—today, tomorrow, and forever.</span>
+            </p>
+          </div>
+
+          <div class="letter-signoff">
+            <span>With all my heart &amp; soul,</span>
+            <div class="letter-signature">Bhabesh ♥</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. INTERACTIVE "OPEN WHEN..." ENVELOPES & BIRTHDAY WISH SURPRISE -->
+    <section id="surprises">
+      <div class="container">
+        <div class="text-center reveal">
+          <span class="section-badge">Little Secrets For You</span>
+          <h2 class="section-title">Open When...</h2>
+          <p class="section-subtitle">
+            Tap any envelope whenever your heart needs a little note from me.
+          </p>
+        </div>
+
+        <div class="envelopes-grid reveal">
+          <div class="envelope-card" role="button" tabindex="0" data-note="0">
+            <span class="envelope-icon">💌</span>
+            <h3 class="envelope-label">Open when you miss me in the other college block</h3>
+            <span class="envelope-tap-hint">Tap to unseal →</span>
+          </div>
+
+          <div class="envelope-card" role="button" tabindex="0" data-note="1">
+            <span class="envelope-icon">🤍</span>
+            <h3 class="envelope-label">Open after a silly argument</h3>
+            <span class="envelope-tap-hint">Tap to unseal →</span>
+          </div>
+
+          <div class="envelope-card" role="button" tabindex="0" data-note="2">
+            <span class="envelope-icon">✨</span>
+            <h3 class="envelope-label">Open when you need a reminder of how loved you are</h3>
+            <span class="envelope-tap-hint">Tap to unseal →</span>
+          </div>
+
+          <div class="envelope-card" role="button" tabindex="0" data-note="3">
+            <span class="envelope-icon">🎂</span>
+            <h3 class="envelope-label">Open on your birthday</h3>
+            <span class="envelope-tap-hint">Tap to unseal →</span>
+          </div>
+        </div>
+
+        <!-- Birthday Wish Finale -->
+        <div class="wish-box reveal">
+          <svg class="cake-illustration" viewBox="0 0 130 130" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Birthday cake with glowing candle">
+            <!-- Plate -->
+            <ellipse cx="65" cy="112" rx="54" ry="10" fill="#ffc2d4"/>
+            <!-- Cake Bottom Layer -->
+            <rect x="23" y="76" width="84" height="32" rx="10" fill="#ff8fab"/>
+            <!-- Cake Top Layer -->
+            <rect x="33" y="52" width="64" height="28" rx="9" fill="#ffb3c6"/>
+            <!-- Frosting Drips -->
+            <path d="M33 58 Q41 68 49 58 Q57 68 65 58 Q73 68 81 58 Q89 68 97 58 L97 52 L33 52 Z" fill="#ffffff"/>
+            <!-- Candle -->
+            <rect x="61" y="34" width="8" height="18" rx="3" fill="#ff4d6d"/>
+            <!-- Glowing Flame -->
+            <path id="cake-flame" class="flame" d="M65 14 C71 22, 71 31, 65 33 C59 31, 59 22, 65 14 Z" fill="#ffbe0b"/>
+          </svg>
+
+          <h3 class="section-title" style="font-size: clamp(1.55rem, 3vw, 2.2rem);">
+            Close Your Eyes &amp; Make a Wish, Dibya
+          </h3>
+          <p style="color: var(--text-muted); max-width: 520px; margin: 0 auto 14px;">
+            May every dream in your pure heart come true this year. Whenever you're ready, tap the button below to blow out your candle!
+          </p>
+
+          <button type="button" class="wish-btn" id="wish-btn">
+            <span>🕯️</span>
+            <span>Make a Wish &amp; Blow the Candle</span>
+          </button>
+
+          <p class="wish-revealed-msg" id="wish-revealed-msg" aria-live="polite">
+            🎉 Happy Birthday Dibya! May all your wishes come true—I love you endlessly! — Bhabesh ♥
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <p>Handcrafted with endless love for Dibya (December 12) • Forever yours, Bhabesh ♥</p>
+    </footer>
+  </main>
+
+  <!-- ========================================================================
+       MODAL FOR "OPEN WHEN..." LETTERS
+       ======================================================================== -->
+  <div class="modal-backdrop" id="note-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-card">
+      <button type="button" class="modal-close" id="modal-close" aria-label="Close letter">×</button>
+      <div style="font-size: 2rem; margin-bottom: 8px;">💌</div>
+      <h3 class="modal-title" id="modal-title">Note Title</h3>
+      <p class="modal-body" id="modal-body">Note content goes here.</p>
+      <p style="font-family: var(--font-cursive); font-size: 1.65rem; color: var(--pink-deep);">
+        Always yours, Bhabesh ♥
+      </p>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       JAVASCRIPT: LOCK SCREEN, WEB AUDIO SYNTHESIZER, COUNTER & INTERACTIONS
+       ======================================================================== -->
+  <script>
+    (function () {
+      "use strict";
+
+      /* ----------------------------------------------------------------------
+         1. AMBIENT FLOATING PETALS & STARS GENERATOR (GPU TRANSFORM ONLY)
+         ---------------------------------------------------------------------- */
+      const ambientLayer = document.getElementById("ambient-layer");
+      const symbols = ["🌸", "♥", "✦", "❀"];
+      const particleCount = window.innerWidth < 600 ? 12 : 20;
+
+      for (let i = 0; i < particleCount; i++) {
+        const el = document.createElement("span");
+        el.className = "ambient-particle";
+        el.textContent = symbols[i % symbols.length];
+        el.style.left = Math.random() * 100 + "%";
+        el.style.fontSize = (11 + Math.random() * 10) + "px";
+        el.style.color = i % 2 === 0 ? "#ff8fab" : "#ffb3c6";
+        el.style.animationDuration = (14 + Math.random() * 14) + "s";
+        el.style.animationDelay = (-Math.random() * 20) + "s";
+        ambientLayer.appendChild(el);
+      }
+
+      /* ----------------------------------------------------------------------
+         2. BUILT-IN ROMANTIC PIANO / MUSIC-BOX SYNTHESIZER (WEB AUDIO API)
+         ---------------------------------------------------------------------- */
+      class RomanticMusicBox {
+        constructor() {
+          this.ctx = null;
+          this.isPlaying = false;
+          this.timerId = null;
+          this.stepIndex = 0;
+
+          // Tender, dreamy music-box melody in F Major / D Minor (Frequencies in Hz)
+          // Gentle waltz/lullaby arpeggio progression: Fmaj7 -> Dm7 -> Bbmaj7 -> Csus4/C
+          this.melody = [
+            // Bar 1: Fmaj7
+            { note: 349.23, bass: 174.61, dur: 0.55 }, // F4 + F3
+            { note: 440.00, bass: null,   dur: 0.55 }, // A4
+            { note: 523.25, bass: null,   dur: 0.55 }, // C5
+            { note: 659.25, bass: null,   dur: 1.10 }, // E5
+            // Bar 2: Dm7
+            { note: 587.33, bass: 146.83, dur: 0.55 }, // D5 + D3
+            { note: 523.25, bass: null,   dur: 0.55 }, // C5
+            { note: 440.00, bass: null,   dur: 0.55 }, // A4
+            { note: 523.25, bass: null,   dur: 1.10 }, // C5
+            // Bar 3: Bbmaj7
+            { note: 466.16, bass: 116.54, dur: 0.55 }, // Bb4 + Bb2
+            { note: 587.33, bass: null,   dur: 0.55 }, // D5
+            { note: 698.46, bass: null,   dur: 0.55 }, // F5
+            { note: 659.25, bass: null,   dur: 1.10 }, // E5
+            // Bar 4: Cadd9 -> Resolution
+            { note: 523.25, bass: 130.81, dur: 0.55 }, // C5 + C3
+            { note: 587.33, bass: null,   dur: 0.55 }, // D5
+            { note: 440.00, bass: null,   dur: 0.55 }, // A4
+            { note: 392.00, bass: null,   dur: 1.25 }  // G4
+          ];
+        }
+
+        ensureContext() {
+          if (!this.ctx) {
+            const AudioCtx = window.AudioContext || window.webkitAudioContext;
+            this.ctx = new AudioCtx();
+          }
+          if (this.ctx.state === "suspended") {
+            this.ctx.resume();
+          }
+        }
+
+        // Play a single delicate music-box bell/piano tone
+        playTone(freq, duration, volume = 0.08, isBass = false) {
+          if (!this.ctx) return;
+          const now = this.ctx.currentTime;
+
+          const osc = this.ctx.createOscillator();
+          const overtone = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+          const overtoneGain = this.ctx.createGain();
+
+          osc.type = "sine";
+          osc.frequency.setValueAtTime(freq, now);
+
+          // Subtle harmonic shimmer (2x frequency) for music-box sparkle
+          overtone.type = "triangle";
+          overtone.frequency.setValueAtTime(freq * 2, now);
+
+          const targetVol = isBass ? volume * 0.65 : volume;
+          gain.gain.setValueAtTime(0.0001, now);
+          gain.gain.exponentialRampToValueAtTime(targetVol, now + 0.03);
+          gain.gain.exponentialRampToValueAtTime(0.0001, now + duration + 1.1);
+
+          overtoneGain.gain.setValueAtTime(0.0001, now);
+          overtoneGain.gain.exponentialRampToValueAtTime(targetVol * 0.18, now + 0.02);
+          overtoneGain.gain.exponentialRampToValueAtTime(0.0001, now + duration * 0.6);
+
+          osc.connect(gain);
+          overtone.connect(overtoneGain);
+          overtoneGain.connect(gain);
+          gain.connect(this.ctx.destination);
+
+          osc.start(now);
+          overtone.start(now);
+          osc.stop(now + duration + 1.2);
+          overtone.stop(now + duration + 1.2);
+        }
+
+        // Soft chime played on keypad tap or unlock
+        playKeyClick() {
+          try {
+            this.ensureContext();
+            this.playTone(783.99, 0.18, 0.045, false);
+          } catch (e) { /* Ignore if blocked before gesture */ }
+        }
+
+        playUnlockChime() {
+          try {
+            this.ensureContext();
+            const chord = [523.25, 659.25, 783.99, 1046.50]; // C5 E5 G5 C6
+            chord.forEach((freq, idx) => {
+              setTimeout(() => this.playTone(freq, 0.9, 0.075, false), idx * 110);
+            });
+          } catch (e) {}
+        }
+
+        start() {
+          try {
+            this.ensureContext();
+            if (this.isPlaying) return;
+            this.isPlaying = true;
+            this.updateUI();
+            this.scheduleNext();
+          } catch (e) {}
+        }
+
+        scheduleNext() {
+          if (!this.isPlaying) return;
+          const item = this.melody[this.stepIndex];
+          this.playTone(item.note, item.dur, 0.065, false);
+          if (item.bass) {
+            this.playTone(item.bass, item.dur * 2.2, 0.055, true);
+          }
+          this.stepIndex = (this.stepIndex + 1) % this.melody.length;
+          this.timerId = setTimeout(() => this.scheduleNext(), item.dur * 1000);
+        }
+
+        stop() {
+          this.isPlaying = false;
+          if (this.timerId) {
+            clearTimeout(this.timerId);
+            this.timerId = null;
+          }
+          this.updateUI();
+        }
+
+        toggle() {
+          if (this.isPlaying) {
+            this.stop();
+          } else {
+            this.start();
+          }
+        }
+
+        updateUI() {
+          const btn = document.getElementById("music-toggle");
+          const label = document.getElementById("music-label");
+          if (this.isPlaying) {
+            btn.classList.add("playing");
+            label.textContent = "Music: On";
+          } else {
+            btn.classList.remove("playing");
+            label.textContent = "Music: Off";
+          }
+        }
+      }
+
+      const musicBox = new RomanticMusicBox();
+      document.getElementById("music-toggle").addEventListener("click", () => {
+        musicBox.toggle();
+      });
+
+      /* ----------------------------------------------------------------------
+         3. CELEBRATION HEART & CONFETTI BURST HELPER
+         ---------------------------------------------------------------------- */
+      function triggerCelebrationBurst(originX, originY, count = 42) {
+        const glyphs = ["♥", "💖", "💗", "✨", "🌸", "💕"];
+        const colors = ["#ff4d6d", "#ff758f", "#ff8fab", "#e63963", "#ffb3c6"];
+
+        for (let i = 0; i < count; i++) {
+          const p = document.createElement("span");
+          p.className = "burst-particle";
+          p.textContent = glyphs[i % glyphs.length];
+          p.style.left = originX + "px";
+          p.style.top = originY + "px";
+          p.style.color = colors[i % colors.length];
+          p.style.fontSize = (14 + Math.random() * 18) + "px";
+
+          const angle = Math.random() * Math.PI * 2;
+          const dist = 90 + Math.random() * Math.max(window.innerWidth, window.innerHeight) * 0.45;
+          const tx = Math.cos(angle) * dist + "px";
+          const ty = (Math.sin(angle) * dist - 80) + "px";
+          const rot = (Math.random() * 360 - 180) + "deg";
+          const dur = (1.3 + Math.random() * 0.9) + "s";
+
+          p.style.setProperty("--tx", tx);
+          p.style.setProperty("--ty", ty);
+          p.style.setProperty("--rot", rot);
+          p.style.setProperty("--dur", dur);
+
+          document.body.appendChild(p);
+          setTimeout(() => p.remove(), 2300);
+        }
+      }
+
+      /* ----------------------------------------------------------------------
+         4. LOCK SCREEN PASSCODE LOGIC (SECRET PIN: 0711)
+         ---------------------------------------------------------------------- */
+      const SECRET_PIN = "0711";
+      let enteredPin = "";
+      let isChecking = false;
+
+      const pinDisplay = document.getElementById("pin-display");
+      const pinBoxes = [
+        document.getElementById("pin-0"),
+        document.getElementById("pin-1"),
+        document.getElementById("pin-2"),
+        document.getElementById("pin-3")
+      ];
+      const statusMsg = document.getElementById("lock-status-msg");
+      const lockScreen = document.getElementById("lock-screen");
+      const mainSite = document.getElementById("main-site");
+
+      function renderPinBoxes() {
+        const icons = ["♥", "★", "♥", "★"];
+        pinBoxes.forEach((box, idx) => {
+          box.classList.remove("error");
+          if (idx < enteredPin.length) {
+            box.classList.add("filled");
+            box.innerHTML = `<span class="pin-icon">${icons[idx]}</span>`;
+          } else {
+            box.classList.remove("filled");
+            box.innerHTML = "";
+          }
+        });
+      }
+
+      function handleKeyInput(key) {
+        if (isChecking) return;
+        musicBox.playKeyClick();
+
+        if (key === "*") {
+          // Clear all
+          enteredPin = "";
+          statusMsg.textContent = "";
+          renderPinBoxes();
+          return;
+        }
+
+        if (key === "#") {
+          // Backspace
+          enteredPin = enteredPin.slice(0, -1);
+          statusMsg.textContent = "";
+          renderPinBoxes();
+          return;
+        }
+
+        if (/^\d$/.test(key) && enteredPin.length < 4) {
+          enteredPin += key;
+          renderPinBoxes();
+
+          if (enteredPin.length === 4) {
+            verifyPasscode();
+          }
+        }
+      }
+
+      function verifyPasscode() {
+        isChecking = true;
+
+        if (enteredPin === SECRET_PIN) {
+          statusMsg.textContent = "Unlocked! Happy Birthday, Dibya ♥";
+          musicBox.playUnlockChime();
+
+          // Heart burst from center of screen
+          triggerCelebrationBurst(window.innerWidth / 2, window.innerHeight / 2, 55);
+
+          setTimeout(() => {
+            lockScreen.classList.add("unlocked");
+            document.body.classList.remove("is-locked");
+            mainSite.classList.add("visible");
+            musicBox.start();
+
+            setTimeout(() => {
+              lockScreen.style.display = "none";
+            }, 950);
+          }, 550);
+        } else {
+          // Wrong PIN: shake boxes gently and clear them
+          statusMsg.textContent = "Oops, try again! Hint: My birthday date ♥";
+          pinDisplay.classList.add("shake");
+          pinBoxes.forEach((b) => b.classList.add("error"));
+
+          setTimeout(() => {
+            pinDisplay.classList.remove("shake");
+            enteredPin = "";
+            renderPinBoxes();
+            isChecking = false;
+          }, 550);
+        }
+      }
+
+      // Click/Tap Listeners for Keypad
+      document.getElementById("keypad").addEventListener("click", (e) => {
+        const btn = e.target.closest(".key-btn");
+        if (!btn) return;
+        handleKeyInput(btn.dataset.key);
+      });
+
+      // Keyboard support when lock screen is visible
+      document.addEventListener("keydown", (e) => {
+        if (lockScreen.style.display === "none") return;
+        if (e.key >= "0" && e.key <= "9") {
+          handleKeyInput(e.key);
+        } else if (e.key === "Backspace") {
+          handleKeyInput("#");
+        } else if (e.key === "Escape" || e.key === "Delete") {
+          handleKeyInput("*");
+        }
+      });
+
+      /* ----------------------------------------------------------------------
+         5. LIVE "3 YEARS TOGETHER" RELATIONSHIP COUNTER
+         ---------------------------------------------------------------------- */
+      // Anchored 3 years prior to Dibya's birthday celebration (Dec 12)
+      const anniversaryStart = new Date("2023-12-12T00:00:00");
+
+      function updateRelationshipCounter() {
+        const now = new Date();
+        let diffMs = now - anniversaryStart;
+        if (diffMs < 0) diffMs = 3 * 365 * 24 * 60 * 60 * 1000;
+
+        const totalSeconds = Math.floor(diffMs / 1000);
+        const totalHours = Math.floor(totalSeconds / 3600);
+        const totalDays = Math.floor(totalHours / 24);
+        const years = Math.max(3, Math.floor(totalDays / 365));
+        const liveSecs = totalSeconds % 60;
+
+        document.getElementById("cnt-years").textContent = years.toLocaleString();
+        document.getElementById("cnt-days").textContent = totalDays.toLocaleString();
+        document.getElementById("cnt-hours").textContent = totalHours.toLocaleString();
+        document.getElementById("cnt-seconds").textContent = String(liveSecs).padStart(2, "0");
+      }
+
+      updateRelationshipCounter();
+      setInterval(updateRelationshipCounter, 1000);
+
+      /* ----------------------------------------------------------------------
+         6. POKHARA HOTEL PHOTO LIVE UPLOAD PREVIEW
+         ---------------------------------------------------------------------- */
+      const pokharaInput = document.getElementById("pokhara-file-input");
+      const pokharaBox = document.getElementById("pokhara-photo-box");
+
+      if (pokharaInput && pokharaBox) {
+        pokharaInput.addEventListener("change", (e) => {
+          const file = e.target.files && e.target.files[0];
+          if (!file) return;
+          const reader = new FileReader();
+          reader.onload = function (evt) {
+            pokharaBox.style.borderStyle = "solid";
+            pokharaBox.innerHTML = `<img src="${evt.target.result}" alt="Bhabesh and Dibya at Pokhara Hotel" />`;
+          };
+          reader.readAsDataURL(file);
+        });
+      }
+
+      /* ----------------------------------------------------------------------
+         7. INTERACTIVE "OPEN WHEN..." ENVELOPE MODAL
+         ---------------------------------------------------------------------- */
+      const openWhenNotes = [
+        {
+          title: "When you miss me in the other college block 🏛️",
+          body: "Even though our classrooms are in completely different blocks and we barely get a chance to cross paths during the day, you are the first thought on my mind between every period. Close your eyes for two seconds—I'm right there cheering you on until we finally meet."
+        },
+        {
+          title: "After a silly argument 🤍",
+          body: "Take a deep breath, my love. No disagreement could ever weigh more than the three years we've built together. Thank you for always having the biggest heart, for never walking away, and for always choosing us. I'm sorry whenever I make things hard—come let me hold your hand."
+        },
+        {
+          title: "When you need a reminder of how loved you are ✨",
+          body: "You are cherished beyond words, Dibya. Every gentle way you care, every smile you share, and every moment you stand beside me makes me the luckiest guy alive. Never doubt for a single second how deeply you are adored."
+        },
+        {
+          title: "On your birthday (December 12) 🎂",
+          body: "Happy Birthday to the girl who stole my heart in school and keeps it safe every single day! I hope this new year of your life overflows with joy, peace, success, and endless moments of us laughing together. Here's to celebrating many more Decembers side by side."
+        }
+      ];
+
+      const modal = document.getElementById("note-modal");
+      const modalTitle = document.getElementById("modal-title");
+      const modalBody = document.getElementById("modal-body");
+      const modalClose = document.getElementById("modal-close");
+
+      function openNoteModal(index) {
+        const note = openWhenNotes[index];
+        if (!note) return;
+        modalTitle.textContent = note.title;
+        modalBody.textContent = note.body;
+        modal.classList.add("open");
+      }
+
+      document.querySelectorAll(".envelope-card").forEach((card) => {
+        card.addEventListener("click", () => {
+          openNoteModal(Number(card.dataset.note));
+        });
+        card.addEventListener("keydown", (e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            openNoteModal(Number(card.dataset.note));
+          }
+        });
+      });
+
+      modalClose.addEventListener("click", () => modal.classList.remove("open"));
+      modal.addEventListener("click", (e) => {
+        if (e.target === modal) modal.classList.remove("open");
+      });
+
+      /* ----------------------------------------------------------------------
+         8. BIRTHDAY CAKE WISH & CELEBRATION EXPLOSION
+         ---------------------------------------------------------------------- */
+      const wishBtn = document.getElementById("wish-btn");
+      const cakeFlame = document.getElementById("cake-flame");
+      const wishMsg = document.getElementById("wish-revealed-msg");
+
+      wishBtn.addEventListener("click", (e) => {
+        cakeFlame.classList.add("blown-out");
+        wishMsg.classList.add("show");
+        musicBox.playUnlockChime();
+
+        const rect = wishBtn.getBoundingClientRect();
+        const cx = rect.left + rect.width / 2;
+        const cy = rect.top + rect.height / 2;
+
+        triggerCelebrationBurst(cx, cy, 65);
+        setTimeout(() => triggerCelebrationBurst(window.innerWidth * 0.25, window.innerHeight * 0.4, 30), 220);
+        setTimeout(() => triggerCelebrationBurst(window.innerWidth * 0.75, window.innerHeight * 0.4, 30), 380);
+      });
+
+      /* ----------------------------------------------------------------------
+         9. SCROLL REVEAL INTERSECTION OBSERVER
+         ---------------------------------------------------------------------- */
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("in-view");
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.14 }
+      );
+
+      document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
+    })();
+  </script>
+</body>
+</html>
